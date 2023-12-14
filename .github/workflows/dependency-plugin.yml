@@ -21,4 +21,4 @@ jobs:
       with:
         dependency-graph: generate
     - name: Run build with Gradle wrapper
-      run: ./gradlew ForceDependencyResolutionPlugin_resolveAllDependencies
+      run: ./gradlew -Dorg.gradle.configuration-cache=false -Dorg.gradle.dependency.verification=off -Dorg.gradle.warning.mode=none ForceDependencyResolutionPlugin_resolveAllDependencies
