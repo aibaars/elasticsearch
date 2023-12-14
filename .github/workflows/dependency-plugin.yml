@@ -1,0 +1,24 @@
+name: Dependency Plugin
+
+on:
+  workflow_dispatch:
+  push:
+  
+jobs:   
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        # Check available parameters in: https://github.com/actions/setup-java/blob/main/action.yml
+        java-version: 17
+        distribution: 'zulu'
+    - name: Checkout project sources
+      uses: actions/checkout@v4
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        dependency-graph: generate
+    - name: Run build with Gradle wrapper
+      run: ./gradlew ForceDependencyResolutionPlugin_resolveAllDependencies
